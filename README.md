@@ -22,6 +22,7 @@
 #### Html,Css,Javascript,Django, Bootstrap.
 
 # Video Demo
+Link: https://drive.google.com/file/d/18yVMZQT-zQFe6jStn1aQ6GRIkf1Su2Wf/view?usp=sharing
 
 # Screenshots:
 
