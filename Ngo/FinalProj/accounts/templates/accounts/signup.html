@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body style="text-align: center;">
+    <h1 style="padding-top: 50px;font-weight: bolder; padding-bottom: 20px; background-color: #ffcc66;" align="center">Signup</h1>
+    <div class="container-fluid" style="padding-top: 100px;">
+    <form style="display: inline-block; text-align: left;" class="site-form" action="/accounts/signup/" method="post" class="text-white">
+        {%csrf_token%}
+        <div>{{ form.as_p }}</div>
+        <div align="center" class="button">
+        <button type="submit" class="btn btn-primary">Signup</button>
+        </div>
+    </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>  
+
+    <h1 align="center"
+    style="padding-top: 80px;padding-bottom: 10px;font-weight: 600;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; background-color:#66d9ff";>Login</h1>
+    <div class="container-fluid" align="center"
+    style="padding-top: 150px;
+    padding-bottom: 50px;
+     background-color:#ccf2ff">
+    <form class="site-form" action="{% url 'accounts:login' %}" method="post">
+        {%csrf_token%}
+        <p class="text-white">{{ form.as_p }}</p>
+        {% if request.GET.next%}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% endif %}
+        <button 
+        style="background-color: white;
+        color: black;
+        border: 2px solid black;"
+        type="submit" class="btn btn-primary">Login</button>
+    </form>
+    </div>
+
+</body>
+</html>

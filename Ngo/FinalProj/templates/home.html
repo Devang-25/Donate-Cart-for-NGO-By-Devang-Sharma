@@ -1,0 +1,341 @@
+{% load check %}
+<html>
+<title>U&I - Be the Change</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
+.mySlides {display:none}
+.w3-tag, .fa {cursor:pointer}
+.w3-tag {height:15px;width:15px;padding:0;margin-top:6px}
+
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+.count {
+  transition: --num 4s;
+  counter-set: num var(--num);
+  font: 800 40px system-ui;
+}
+.count::after {
+  content: counter(num);
+}
+.count:hover {
+  --num: {{count}};
+}
+ul,li{
+  list-style:none;
+}
+ul{
+  overflow:hidden;
+  padding:3em;
+}
+ul li a{
+  text-decoration:none;
+  color:#000;
+  background:#bfbfbf;
+  display:block;
+  height:25em;
+  width:25em;
+  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -moz-transition:-moz-transform .15s linear;
+  -o-transition:-o-transform .15s linear;
+  -webkit-transition:-webkit-transform .15s linear;
+}
+ul li{
+  margin:1em;
+  float:left;
+}
+ul li h2{
+  padding-top: 10px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size:180%;
+  font-weight:bold;
+  padding-bottom:10px;
+}
+ul li p{
+  font-family:"Reenie Beanie",arial,sans-serif;
+  font-size:120%;
+}
+ul li a{
+  -webkit-transform: rotate(-6deg);
+  -o-transform: rotate(-6deg);
+  -moz-transform:rotate(-6deg);
+}
+ul li:nth-child(even) a{
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+  position:relative;
+  top:5px;
+  background:#f2f2f2;
+}
+ul li:nth-child(3n) a{
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+  background:#bfbfbf;
+}
+ul li:nth-child(5n) a{
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  position:relative;
+  top:-10px;
+}
+ul li a:hover,ul li a:focus{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  position:relative;
+  z-index:5;
+}
+ol{text-align:center;}
+ol li{display:inline;padding-right:1em;}
+ol li a{color:#fff;}
+</style>
+<body style="background-color:powderblue;">
+
+<div class="w3-top">
+  <div class="w3-row w3-large w3-light-grey">
+    <div class="w3-col s3">
+      <a href="#" class="w3-button w3-block">Home</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#plans" class="w3-button w3-block">We need you</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#about" class="w3-button w3-block">About us</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#contact" class="w3-button w3-block">Contact</a>
+    </div>
+    {% if user.is_authenticated %}
+    <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
+      {% csrf_token %}
+      <div class="w3-col s4">
+        {% if request|register_or_profile %}
+        <a href="{% url 'accounts:ngodetail' %}" class="w3-button w3-block">Go to Profile</a>
+        </div>
+        <div class="w3-col s4">
+        <a href="{% url 'accounts:reset' %}" class="w3-button w3-block"> Reset Password </a>
+        </div>
+        <div class="w3-col s4">
+        <button class="w3-button w3-block" type="submit"> Logout</button>
+        </div>
+        {% else %}
+        <div class="w3-col s4">
+        <a href="{% url 'accounts:ngo_register'%}" class="w3-button w3-block">Register your Ngo</a>
+        </div>
+        <div class="w3-col s4">
+        <a href="{% url 'accounts:reset'%}" class="w3-button w3-block">Reset Password </a>
+        </div>
+        <div class="w3-col s4">
+        <button class="w3-button w3-block" type="submit">Logout</button>
+        </div>     
+      {% endif %}  
+  </form>
+    {% else %}
+    <div class="w3-col s6">
+      <a href="{% url 'accounts:signup'%}" class="w3-button w3-block">Signup</a>
+    </div>
+    <div class="w3-col s6">
+      <a href="{% url 'accounts:login'%}" class="w3-button w3-block">Login</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+
+
+<div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+
+        <div class="w3-center w3-padding-64">
+        <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Motivation Behind U&I Foundation</span>
+
+        <br>
+        <br>
+    <h5> U&I is a volunteer-driven charitable organization based in <b>Bangalore, India.</b> <br>
+      <br>The vision for U&I was inspired when our Co-founders, <b>Ajit Sivaram and Satish Manchikanti</b>, along with a few friends, would visit the <b>Institute for Mentally Handicapped Children</b> every Sunday. The group would hang out with the special needs boys at the Home, playing games with them or spending time cleaning the compound. They realized that ordinary people coming together can make a huge difference in the lives of the neglected. Over time, the handful of friends grew into a 50+ strong volunteer group. <br>
+      <br>Around the same time as this social outreach, Satish ran a successful HR business. After discussions with Ajit, he decided to use the office space to conduct computer classes in the evening for children from a nearby slum. It was here that U&I was birthed. With the <b>heart-warming response from volunteers and the students</b>, Satish and Ajit decided that the idea of teaching kids through volunteers was worth pursuing. That was back in 2011.<br>      
+      <br>Today, <b>U&I reaches 1600 children in 52 Learning Centers across 20 cities in India</b> through our Teach program. We work with around <b>2000 Volunteers</b> who give their time, talent and energy so they can be the change. We continue the work that was started in the Home for special needs boys, now expanding our Care program to 4 other Homes.
+      We continue to believe in the potential of every child we reach. We continue to hold firm to the idea that, together, <b><i>WE CAN MAKE A DIFFERENCE</i></b>.
+    </h5>
+      
+  </div>
+
+
+  <div class="w3-container">
+    <div class="w3-display-container mySlides">
+      <img src="https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,f_auto,h_1440,q_90,w_720/8788/Care_ucc2db.jpg" style="width:100%">
+      <div class="w3-display-topleft w3-container w3-padding-32">
+      </div>
+    </div>
+    <div class="w3-display-container mySlides">
+      <img src="https://bestdelegate.com/wp-content/uploads/2016/02/sdgs-list-en-500x287.jpg" style="width:100%">
+      <div class="w3-display-middle w3-container w3-padding-32">
+      </div>
+    </div>
+    <div class="w3-display-container mySlides">
+      <img src="https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_auto/8788/955414_451256.jpeg" style="width:100%">
+      <div class="w3-display-topright w3-container w3-padding-32">
+      </div>
+    </div>
+
+
+    <div class="w3-container w3-dark-grey w3-padding w3-xlarge">
+      <div class="w3-left" onclick="plusDivs(-1)"><i class="fa fa-arrow-circle-left w3-hover-text-teal"></i></div>
+      <div class="w3-right" onclick="plusDivs(1)"><i class="fa fa-arrow-circle-right w3-hover-text-teal"></i></div>
+    
+      <div class="w3-center">
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+        <span class="w3-tag demodots w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="w3-row w3-container">
+    <div class="w3-center w3-padding-64">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16"><b>Best Donors</b></span>
+    </div>
+
+    <div class="w3-col l12 m6 w3-grey w3-container w3-padding-16">
+      <h3><b>Total Number of Donations</b></h3>
+      <div class="count">
+        <h3><b>Hover over the number</b></h3>
+      </div>
+    </div>
+    <div class="w3-col l12 m6 w3-light-grey w3-container w3-padding-16">
+      <h3><b>Best Donors</b></h3>
+      {% for user in best_users %}
+      <h3>{{ user.0}} {{user.1 }}</h3>
+      {% endfor %}
+    </div>
+  
+
+  <div class="w3-row-padding" id="plans">
+    <div class="w3-center w3-padding-64">
+      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">NGO's out there that need you
+        </span>
+      <ul>
+        {% for ngo in ngos %}
+        <li>
+          <a href="{% url 'accounts:donator' %}">
+            <h2>{{ngo.name}}</h2>
+            <h2>Founder: {{ngo.founder}}</h2>
+            {% for req in ngo.ngorequirementdetail_set.all %}
+            {% if req.quantity > 0 %}
+            <p>{{req.req}} ({{req.quantity}})</p>
+            {% endif %}
+            {% endfor %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+
+
+      <div class="w3-row w3-margin-bottom">
+        <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Meet the Developer
+        </span>
+
+        <div class="w3-auto">
+          <div class="w3-container">
+            <br>
+            <h3><b><i>DEVANG SHARMA</i></b></h3>
+            <p><h4>Devang Sharma is a Senior Software Developer at CISCO</h4></p>
+            <p><h4>This Website Was Built By Devang Sharma for Innovation 4 Community Hacakthon Organised by CISCO</h4></p>
+            <p><h4></h4>(C) All Copyrights are Reserved by the Author</h4></p>
+            <a href="https://www.linkedin.com/in/devang25/" target="_blank" class="w3-button w3-light-green w3-block">Linkedin</a>
+            <br>
+            <a href="https://www.instagram.com/idevangsharma/" target="_blank" class="w3-button w3-light-green w3-block">Instagram</a>
+
+          </div>
+        </div>
+      </div>
+
+
+  <div class="w3-center w3-padding-64" id="contact">
+    <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Contact Us</span>
+  </div>
+
+    <form class="w3-container" action="{% url 'accounts:contact' %}" method="post">
+    <div class="w3-section">
+      <label>Name</label>
+      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="text" name="Name" required>
+    </div>
+    <div class="w3-section">
+      <label>Email</label>
+      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="text" name="Email" required>
+    </div>
+    <div class="w3-section">
+      <label>Subject</label>
+      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="Subject" required>
+    </div>
+    <div class="w3-section">
+      <label>Message</label>
+      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="Message" required>
+    </div>
+    <button type="submit" class="w3-button w3-block w3-black">Send</button>
+  </form>
+
+</div>
+
+
+<footer class="w3-container w3-padding-32 w3-light-grey w3-center">
+  <a href="#" class="w3-button w3-black w3-margin"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+</footer>
+
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demodots");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length} ;
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " w3-white";
+}
+</script>
+
+</body>
+</html>

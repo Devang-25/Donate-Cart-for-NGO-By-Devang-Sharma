@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Requirements</title>
+    <style>
+        body{
+            background-image: url(https://images.pexels.com/photos/316466/pexels-photo-316466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        ul{
+            padding-top: 10px;
+            padding-left: 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        ul li{
+            padding-top: 10px;
+            list-style: none;
+        }
+        ul li a{
+            position: relative;
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background:#000000;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
+            z-index: 1;
+        }
+        ul:hover li a{
+            opacity: 0.5;
+        }
+        ul li a:hover{
+            transform: scale(1.4);
+            z-index: 1000;
+            background: #ff3f81;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li data-text="Home"><a href="{% url 'accounts:ngodetail' %}">Go to Profile</a></li>
+    </ul>
+    <div class="container">
+        <h1 align="center" style="padding-top: 50px;">Want to update your Medical Requirements?</h1>
+        <h3 align="center" style="padding-top: 50px;">Enter Requirement and its Quantity to Update : </h3>
+        <div>
+        {% if messages %}
+            {% for message in messages %}
+                <h4 align="center">{{message}}</h4>
+            {% endfor %}
+        {% endif %}
+        </div>
+        <form action="{% url 'accounts:edit_view' %}" method="post">
+        {%csrf_token%} 
+        <div align="center" style="padding-top: 20px;">
+        <h4>Requirement :</h4><input type="text" name="requirement">
+        <h4>Quantity :</h4><input type="number" name="quantity">
+        <div style="padding-top: 20px;"></div>
+        <button style="font-family: Georgia, 'Times New Roman', Times, serif; font-size:large" type="submit">Edit</button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>

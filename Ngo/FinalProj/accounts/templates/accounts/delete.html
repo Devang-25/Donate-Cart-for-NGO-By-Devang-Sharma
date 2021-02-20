@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Requirement</title>
+</head>
+<style>
+    body{
+        background-image: url(https://images.pexels.com/photos/910213/pexels-photo-910213.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+        background-attachment: fixed;
+    }
+    ul{
+            padding-top: 10px;
+            padding-left: 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        ul li{
+            padding-top: 10px;
+            list-style: none;
+        }
+        ul li a{
+            position: relative;
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background:#000000;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
+            z-index: 1;
+        }
+        ul:hover li a{
+            opacity: 0.5;
+        }
+        ul li a:hover{
+            transform: scale(1.4);
+            z-index: 1000;
+            background: #ff3f81;
+            opacity: 1;
+        }
+</style>
+<body>
+    <ul>
+        <li data-text="Home"><a href="{% url 'accounts:ngodetail' %}">Go to Profile</a></li>
+    </ul>
+<div style="padding-top: 50px; padding-left:100px" class="container">
+    <div>
+        <h1>Already have what you want?</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <h4 align="center">{{message}}</h4>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form action="{% url 'accounts:delete_view' %}" method="post">
+        {% csrf_token %}
+           <h2>Enter the name of the Requirement you wish to delete : </h2> <input type="text" name="req">
+        <div style=" padding-top: 20px;"> 
+        <button style="font-size:large;" type="submit">Delete</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

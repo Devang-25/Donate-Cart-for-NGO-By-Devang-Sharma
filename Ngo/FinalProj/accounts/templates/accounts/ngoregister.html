@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NgoRegister</title>
+    <style>
+        body{
+            background-image: url(https://www.3dspectratech.com/wp-content/uploads/2016/05/page-background-testimonials.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .button {
+         transition-duration: 0.4s;
+         padding-top: 40px;
+        }
+        ul{
+            padding-top: 10px;
+            padding-left: 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        ul li{
+            padding-top: 10px;
+            list-style: none;
+        }
+        ul li a{
+            position: relative;
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background:#000000;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
+            z-index: 1;
+        }
+        ul:hover li a{
+            opacity: 0.5;
+        }
+        ul li a:hover{
+            transform: scale(1.4);
+            z-index: 1000;
+            background: #ff3f81;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body align="center">
+    <ul align="left">
+        <li data-text="Home"><a href="{% url 'home' %}">Go to Homepage</a></li>
+    </ul>
+    <div style="color: whitesmoke;font-size: xx-large;" class="container">
+        <h1>Register your NGO</h1>
+        <div style="padding-top: 50px;" class="form">
+        <form action="{% url 'accounts:ngo_register' %}" method='POST'>
+            {% csrf_token %}
+                {{form.as_p}}
+            <div class="button">
+            <button style="
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            padding: 5px;
+            background-color: white;
+            color: black;
+            border: 2px solid white; font-size: x-large;" type='submit'>Register</button>
+            </div>
+    </form>
+    </div>
+    <div>
+</body>
+</html>

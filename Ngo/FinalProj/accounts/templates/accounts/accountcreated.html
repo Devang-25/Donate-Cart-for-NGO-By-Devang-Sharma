@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-color: black;
+            }
+            ul{
+            padding-top: 10px;
+            padding-left: 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        ul li{
+            padding-top: 10px;
+            list-style: none;
+        }
+        ul li a{
+            position: relative;
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background:#000000;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
+            z-index: 1;
+        }
+        ul:hover li a{
+            opacity: 0.5;
+        }
+        ul li a:hover{
+            transform: scale(1.4);
+            z-index: 1000;
+            background: #ff3f81;
+            opacity: 1;
+        }
+        </style>
+    </head>
+<body>
+    <ul>
+        <li data-text="Home"><a href="{% url 'home' %}">Go to Homepage</a></li>
+    </ul>
+<div style="padding-top:300px;" align="center" class="container">
+<h1 style="color: whitesmoke;">Your account was created successfully</h1>
+<button style="padding: 10px;" ><a style="font-weight: bolder; color: black; text-decoration:none;font-family: 'Times New Roman', Times, serif;" href="{% url 'accounts:ngo_register' %}">Go Ahead Register your NGO</a></button>
+</div>
+</body>
+</html>

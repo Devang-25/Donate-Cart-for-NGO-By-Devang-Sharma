@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngo Detail</title>
+    <style>
+        body{
+            background-image: url(https://remotesitesolutions.com/newsite/wp-content/uploads/2013/02/remote-site-solutions-bg_ngo-sector.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+        width: 100%;
+        height: 100%;
+        }
+        .box {
+        border: 1px solid #fff;
+        padding: 50px;
+        width: 250px;
+        background-color: #fff;
+        opacity: 0.7;
+        }
+        ul{
+            padding-top: 10px;
+            padding-left: 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        ul li{
+            padding-top: 10px;
+            list-style: none;
+        }
+        ul li a{
+            position: relative;
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background:#000000;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
+            z-index: 1;
+        }
+        ul:hover li a{
+            opacity: 0.5;
+        }
+        ul li a:hover{
+            transform: scale(1.4);
+            z-index: 1000;
+            background: #ff3f81;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body >
+        {% if user.is_authenticated %}
+        <ul>
+            <li data-text="Home"><a href="{% url 'home' %}">Go to Homepage</a></li>
+            <li data-text="Want to see your donators?"><a href="{% url 'accounts:donators' %}">Want to see your donators?</a></li>
+            <li data-text="Add Requirement"><a href="{% url 'accounts:edit_view_add' %}">Add Requirement</a></li>
+            <li data-text="Edit your Requirement"><a href="{% url 'accounts:edit_view' %}">Edit your Requirement</a></li>
+            <li data-text="Delete your Requirement"><a href="{% url 'accounts:delete_view' %}">Delete your Requirement</a></li>
+        </ul>
+        {% endif %}
+    <div align="center" class="container">
+        <div align="left" class="box">
+    <h1>{{ngo.name}}</h1>
+    <div></div>
+    <h2>Founder: {{ngo.founder}}</h2>
+    <div></div>
+    {% for req in ngo.ngorequirementdetail_set.all %}
+    {% if req.quantity > 0 %}
+    {{req.req}}
+    ({{req.quantity}})
+    <div></div>
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+   
+</body>
+</html>
+
+    

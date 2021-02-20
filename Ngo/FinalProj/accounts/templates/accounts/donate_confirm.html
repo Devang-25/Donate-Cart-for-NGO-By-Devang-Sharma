@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Confirm</title>
+    <style>
+        body{
+            background-image: url(https://images.pexels.com/photos/919700/pexels-photo-919700.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+        }
+        .container {
+        width: 100%;
+        height: 100%;
+        }
+        .box {
+        border: 1px solid #fff;
+        padding: 50px;
+        width: 500px;
+        background-color: #fff;
+        opacity: 0.7;
+        font-weight: bolder;
+        }ul{
+            padding-top: 10px;
+            padding-left: 50px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        ul li{
+            padding-top: 10px;
+            list-style: none;
+        }
+        ul li a{
+            position: relative;
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background:#000000;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
+            z-index: 1;
+        }
+        ul:hover li a{
+            opacity: 0.5;
+        }
+        ul li a:hover{
+            transform: scale(1.4);
+            z-index: 1000;
+            background: #ff3f81;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li data-text="Home"><a href="{% url 'home' %}">Go to Homepage</a></li>
+    </ul>
+    <div align="center" class="container">
+        {% if messages %}
+          {% for message in messages %}
+          <h3>{{message}}</h3>
+          {% endfor %}
+        {% endif %}
+        <div align="left" class="box">
+        <h1>Donation Confirmation Details</h1>
+        <form style="font-size:x-large;" action="{% url 'accounts:don_confirm' phone=phone %}" method='POST'>     
+            {% csrf_token %}
+            {{form.as_p}}
+            <div align="center" class="button">
+            <input style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: x-large;" type='submit' value='Next'>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
